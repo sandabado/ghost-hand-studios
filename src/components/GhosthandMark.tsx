@@ -140,9 +140,9 @@ export function GhosthandMark({
           y2="424"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#8673FF" />
-          <stop offset="0.48" stopColor="#F4F2FA" />
-          <stop offset="1" stopColor="#C9A961" />
+          <stop stopColor="#79AD8E" />
+          <stop offset="0.48" stopColor="#F1F2EB" />
+          <stop offset="1" stopColor="#C6A66B" />
         </linearGradient>
         <radialGradient
           id="ghosthand-mark-field"
@@ -152,9 +152,9 @@ export function GhosthandMark({
           gradientTransform="translate(360 250) rotate(90) scale(214 184)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#6D4AFF" stopOpacity="0.17" />
-          <stop offset="0.6" stopColor="#8673FF" stopOpacity="0.05" />
-          <stop offset="1" stopColor="#8673FF" stopOpacity="0" />
+          <stop stopColor="#3F765C" stopOpacity="0.19" />
+          <stop offset="0.6" stopColor="#79AD8E" stopOpacity="0.06" />
+          <stop offset="1" stopColor="#79AD8E" stopOpacity="0" />
         </radialGradient>
       </defs>
 
@@ -205,11 +205,11 @@ export function GhosthandMark({
           animate={{ opacity: 1, r: 4 }}
           cx="360"
           cy="250"
-          fill="#F4F2FA"
+          fill="#F1F2EB"
           initial={shouldReduceMotion ? { opacity: 1, r: 4 } : { opacity: 0, r: 1 }}
           transition={shouldReduceMotion ? { duration: 0 } : { delay: 1.92, duration: 0.68, ease: "easeOut" }}
         />
-        <circle cx="360" cy="250" r="8" stroke="#F4F2FA" strokeOpacity="0.32" strokeWidth="1" />
+        <circle cx="360" cy="250" r="8" stroke="#F1F2EB" strokeOpacity="0.32" strokeWidth="1" />
 
         {labels.map(({ name, code, x, y, line, dot, align }) => (
           <g key={name}>
@@ -221,7 +221,7 @@ export function GhosthandMark({
               fontSize="10"
               fontWeight="500"
               letterSpacing="0.16em"
-              opacity="0.56"
+              opacity="0.64"
               textAnchor={align === "start" ? "start" : "end"}
               x={x}
               y={y - 16}
