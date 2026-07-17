@@ -25,6 +25,18 @@ type FieldLabel = {
   align?: "start" | "end";
 };
 
+type FlowRoute = {
+  id: string;
+  d: string;
+  points: Array<[number, number]>;
+  tone: string;
+  delay: number;
+};
+
+const FLOW_CYCLE_SECONDS = 5;
+const FLOW_TRAVEL_SECONDS = 1.08;
+const FLOW_INTRO_DELAY = 2.15;
+
 const framePaths: TracePath[] = [
   {
     d: "M360 76 L447 99 L511 163 L534 250 L511 337 L447 401 L360 424 L273 401 L209 337 L186 250 L209 163 L273 99 Z",
@@ -104,9 +116,48 @@ const labels: FieldLabel[] = [
   },
 ];
 
+const flowRoutes: FlowRoute[] = [
+  {
+    id: "signals-to-core",
+    d: "M229 161 L295 184 L360 250",
+    points: [[229, 161], [295, 184], [360, 250]],
+    tone: "#A9D7BA",
+    delay: 0,
+  },
+  {
+    id: "workflow-to-core",
+    d: "M490 143 L425 184 L360 250",
+    points: [[490, 143], [425, 184], [360, 250]],
+    tone: "#A9D7BA",
+    delay: 0.78,
+  },
+  {
+    id: "control-to-core",
+    d: "M209 401 L295 316 L360 250",
+    points: [[209, 401], [295, 316], [360, 250]],
+    tone: "#C6A66B",
+    delay: 1.56,
+  },
+  {
+    id: "core-to-agents",
+    d: "M360 250 L400 258 L534 250",
+    points: [[360, 250], [400, 258], [534, 250]],
+    tone: "#A9D7BA",
+    delay: 3.08,
+  },
+  {
+    id: "core-to-outcome",
+    d: "M360 250 L425 316 L447 401",
+    points: [[360, 250], [425, 316], [447, 401]],
+    tone: "#F1F2EB",
+    delay: 3.86,
+  },
+];
+
 /**
  * A self-contained, scalable technical mark for Ghosthand's operating-system
- * language. The lines resolve once on entry; `reducedMotion` makes it static.
+ * language. The field resolves once, then cycles data through its governed
+ * process. `reducedMotion` makes it static.
  */
 export function GhosthandMark({
   className,
@@ -172,7 +223,22 @@ export function GhosthandMark({
           stroke="currentColor"
           strokeWidth="1"
         />
-        <ellipse cx="360" cy="250" fill="url(#ghosthand-mark-field)" rx="184" ry="214" />
+        <motion.ellipse
+          animate={
+            shouldReduceMotion
+              ? { opacity: 1, rx: 184, ry: 214 }
+              : { opacity: [0.82, 1, 0.82], rx: [179, 190, 179], ry: [208, 221, 208] }
+          }
+          cx="360"
+          cy="250"
+          fill="url(#ghosthand-mark-field)"
+          initial={false}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : { duration: 5.5, ease: "easeInOut", repeat: Infinity }
+          }
+        />
 
         <motion.g
           animate={shouldReduceMotion ? { opacity: 1 } : { opacity: [0.72, 1] }}
@@ -200,6 +266,87 @@ export function GhosthandMark({
             />
           ))}
         </motion.g>
+
+        <g aria-hidden="true">
+          {flowRoutes.map(({ id, d, points, tone, delay }) => {
+            const [start, middle, end] = points;
+            const flowDelay = FLOW_INTRO_DELAY + delay;
+            const repeatDelay = FLOW_CYCLE_SECONDS - FLOW_TRAVEL_SECONDS;
+            const transition = {
+              duration: FLOW_TRAVEL_SECONDS,
+              delay: flowDelay,
+              ease: "linear" as const,
+              repeat: Infinity,
+              repeatDelay,
+            };
+
+            return (
+              <g key={id}>
+                <motion.path
+                  animate={
+                    shouldReduceMotion
+                      ? { opacity: 0.13, strokeDashoffset: 0 }
+                      : {
+                          opacity: [0.08, 0.56, 0.18, 0.08],
+                          strokeDashoffset: [0, -30],
+                        }
+                  }
+                  d={d}
+                  fill="none"
+                  initial={false}
+                  stroke={tone}
+                  strokeDasharray="2 8"
+                  strokeLinecap="round"
+                  strokeWidth="1.15"
+                  transition={shouldReduceMotion ? { duration: 0 } : transition}
+                />
+                <motion.circle
+                  animate={
+                    shouldReduceMotion
+                      ? { opacity: 0, r: 1 }
+                      : {
+                          cx: [start[0], start[0], middle[0], end[0]],
+                          cy: [start[1], start[1], middle[1], end[1]],
+                          opacity: [0, 1, 1, 0],
+                          r: [1.1, 2.9, 2.4, 1.1],
+                        }
+                  }
+                  fill={tone}
+                  initial={false}
+                  transition={{
+                    ...(shouldReduceMotion ? { duration: 0 } : transition),
+                    times: [0, 0.12, 0.68, 1],
+                  }}
+                />
+              </g>
+            );
+          })}
+        </g>
+
+        <motion.circle
+          animate={
+            shouldReduceMotion
+              ? { opacity: 0, r: 13 }
+              : { opacity: [0, 0.44, 0], r: [13, 24, 36] }
+          }
+          cx="360"
+          cy="250"
+          fill="none"
+          initial={false}
+          stroke="#C6A66B"
+          strokeWidth="1"
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : {
+                  duration: 1.06,
+                  delay: FLOW_INTRO_DELAY + 2.48,
+                  ease: "easeOut",
+                  repeat: Infinity,
+                  repeatDelay: FLOW_CYCLE_SECONDS - 1.06,
+                }
+          }
+        />
 
         <motion.circle
           animate={{ opacity: 1, r: 4 }}
