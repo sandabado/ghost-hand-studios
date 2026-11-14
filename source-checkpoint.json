@@ -1,0 +1,15 @@
+{
+  "localPort": 4173,
+  "sourceCommit": "038d956ef4da2fa1f51f9fa30032bbbaa0746d99",
+  "previousRepositoryMain": "4d8d4ff1f021e988b273b66684c0e1cce6fa211f",
+  "distSha256": {
+    "dist/app.js": "7519967cb092be900c136ee2f494f13f63d153fe99f10c2415883ff00a854f32",
+    "dist/assets/mark.svg": "cde9d0f84e9515ddd378b49568349c73097d212987dc12c0f1a81bbeb7bea2ad",
+    "dist/assets/spectral-hand.png": "a21bfac9ee8a7b226c89ad79b6148cbea9cef572290d8b705e4dc37ce6f7b834",
+    "dist/cases.js": "7a22b8bcc75813f5c5fdd55d1c162bb10f2045fdae7d0c2ace0b0fde03bced76",
+    "dist/field.js": "10e0417d9770b6028f86ccf1caeeff91f2c11d1441722521e9b9a4ac359aa0cd",
+    "dist/index.html": "0a0b4ae1dee0bc7b7cb35b85c6c317a93d0055cb56433d9fdf829f6d881369e2",
+    "dist/style.css": "148478252b756f4442b42e56f8724cb15aa6e5d99996869c66a3e5fda592ae50"
+  },
+  "hosting": "Not configured by this import; prior private Sites identity excluded."
+}

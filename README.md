@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ghosthand Studio
 
-## Getting Started
+An experimental portfolio for Chris Kyser and Jesse Gawlik, built as a dependency-free static web application.
 
-First, run the development server:
+## Run
 
-```bash
+```sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:4173. `PORT` can select another local port. Run `npm run check` for JavaScript syntax checks. The deployable application lives in `dist/`; no build step is needed.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Experience
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Interactive spectral field with pointer response, an amplified mode, pause, reduced motion, and offscreen suspension.
+- Filterable work gallery and keyboard-accessible case dialogs.
+- Native capability accordions and responsive mobile navigation.
+- Project brief creation, edit, copy, text download, and an email draft addressed to `hello@ghosthand.studio`.
 
-## Learn More
+The brief is processed in the browser. No form data is stored or sent by the site. Opening an email draft requires the visitor to send it from their email application.
 
-To learn more about Next.js, take a look at the following resources:
+## Content and assets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`dist/cases.js` holds project narratives adapted from the earlier Ghosthand source. Prior individual experience is attributed in each case; Knowledge Systems is identified as in development. The portfolio artwork is a set of new conceptual studies, not project screenshots or outcome evidence. Replace these with approved project artifacts as they become available.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The spectral hand is an existing generated mood image from the earlier project's `inspo/Lumo generated 2026-11-12 15.13.png`. The hand icon and abstract work illustrations are new design studies, not an approved final identity. Fonts are DM Sans and IBM Plex Mono, served through Google Fonts with system fallbacks.
 
-## Deploy on Vercel
+The intended public brand domain is `ghosthand.studio`. The initial Sites version is private; domain connection and public launch have not been performed.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `dist/index.html` — page, accessible dialogs, portfolio visual studies
+- `dist/style.css` — responsive visual design
+- `dist/app.js` — navigation, filters, cases, brief flow
+- `dist/field.js` — Canvas particle field
+- `dist/cases.js` — editable case content
+- `scripts/serve.mjs` — local static development server
+
+## Source checkpoint
+
+This repository branch contains the portfolio reviewed on localhost:4173, imported from local commit `038d956ef4da2fa1f51f9fa30032bbbaa0746d99`. The `dist/` files are byte-identical to that checkpoint. The earlier repository main is preserved. The unrelated private Sites hosting identity is not included, and this push does not configure hosting.
